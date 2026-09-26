@@ -10,7 +10,6 @@ import {
   EyeOff,
   Check,
 } from "lucide-react";
-
 import { DotLottiePlayer } from "@dotlottie/react-player";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -108,21 +107,18 @@ export default function Register() {
   };
 
   return (
-    <section className="mx-auto flex min-h-[80vh] max-w-6xl items-center justify-center px-4 py-12">
-
+    <section className="mx-auto flex min-h-[80vh] w-full max-w-6xl items-center justify-center px-2 py-6 sm:px-4 sm:py-10">
       {/* Main Card */}
       <div className="w-full overflow-hidden rounded-2xl border border-orange-100 bg-white shadow-xl shadow-orange-900/5">
-
-        <div className="grid md:grid-cols-2">
-
+        {/* Always 2 Columns */}
+        <div className="grid grid-cols-2">
           {/* ========================= */}
           {/* LEFT SIDE - LOTTIE */}
           {/* ========================= */}
-          <div className="flex min-h-[600px] items-center justify-center  p-8 md:p-12">
-
+          <div className="flex min-h-[500px] items-center justify-center p-3 sm:p-6 md:p-10">
             <div className="w-full max-w-md text-center">
-
-              <div className="mx-auto h-72 w-72 md:h-80 md:w-80">
+              {/* Lottie Animation */}
+              <div className="mx-auto h-32 w-32 sm:h-48 sm:w-48 md:h-64 md:w-64 lg:h-72 lg:w-72">
                 <DotLottiePlayer
                   src="/Login%20Leady.lottie"
                   loop
@@ -130,68 +126,59 @@ export default function Register() {
                 />
               </div>
 
-              <h3 className="mt-4 text-2xl font-semibold text-slate-900">
+              {/* Welcome Text */}
+              <h3 className="mt-2 text-sm font-semibold text-slate-900 sm:mt-4 sm:text-lg md:text-2xl">
                 Welcome to FurEver Home
               </h3>
 
-              <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
+              <p className="mx-auto mt-1 hidden max-w-sm text-xs leading-5 text-slate-500 sm:mt-2 sm:block md:text-sm md:leading-6">
                 Help rescued animals find loving and forever homes.
               </p>
-
             </div>
-
           </div>
-
 
           {/* ========================= */}
           {/* RIGHT SIDE - REGISTER FORM */}
           {/* ========================= */}
-          <div className="p-6 sm:p-8 md:p-10">
-
+          <div className="p-3 sm:p-5 md:p-8 lg:p-10">
             {/* Heading */}
             <div className="text-center">
-
-              <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
+              <h2 className="text-lg font-semibold tracking-tight text-slate-900 sm:text-xl md:text-2xl">
                 Create Account
               </h2>
 
-              <p className="mt-1.5 text-xs text-slate-500">
-                Join FurEver Home to help rescued animals find loving families
+              <p className="mt-1 text-[9px] leading-4 text-slate-500 sm:text-xs">
+                Join FurEver Home to help rescued animals find loving
+                families
               </p>
-
             </div>
-
 
             {/* Server Error */}
             {serverError && (
-              <p className="mt-4 rounded-lg bg-rose-50 px-3 py-2 text-xs text-rose-600">
+              <p className="mt-3 rounded-lg bg-rose-50 px-2 py-1.5 text-[10px] text-rose-600 sm:mt-4 sm:px-3 sm:py-2 sm:text-xs">
                 {serverError}
               </p>
             )}
-
 
             {/* Registration Form */}
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="mt-6 space-y-4"
+              className="mt-4 space-y-2.5 sm:mt-6 sm:space-y-4"
             >
-
               {/* ========================= */}
               {/* FULL NAME */}
               {/* ========================= */}
               <div>
-
                 <label
                   htmlFor="name"
-                  className="block text-xs font-medium text-slate-600"
+                  className="block text-[10px] font-medium text-slate-600 sm:text-xs"
                 >
                   Full Name
                 </label>
 
                 <div className="relative mt-1">
-
-                  <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                  <User className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-slate-400 sm:left-3 sm:h-4 sm:w-4" />
 
                   <input
                     id="name"
@@ -199,39 +186,34 @@ export default function Register() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name"
-                    className={`w-full rounded-xl border bg-white py-2.5 pl-10 pr-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 ${
+                    className={`w-full rounded-lg border bg-white py-2 pl-7 pr-2 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-3 sm:text-sm ${
                       errors.name
                         ? "border-rose-300 focus:ring-rose-100"
                         : "border-slate-200 focus:border-primary focus:ring-orange-100"
                     }`}
                   />
-
                 </div>
 
                 {errors.name && (
-                  <p className="mt-1 text-[11px] text-rose-600">
+                  <p className="mt-1 text-[9px] text-rose-600 sm:text-[11px]">
                     {errors.name}
                   </p>
                 )}
-
               </div>
-
 
               {/* ========================= */}
               {/* EMAIL */}
               {/* ========================= */}
               <div>
-
                 <label
                   htmlFor="email"
-                  className="block text-xs font-medium text-slate-600"
+                  className="block text-[10px] font-medium text-slate-600 sm:text-xs"
                 >
                   Email Address
                 </label>
 
                 <div className="relative mt-1">
-
-                  <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                  <Mail className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-slate-400 sm:left-3 sm:h-4 sm:w-4" />
 
                   <input
                     id="email"
@@ -239,32 +221,28 @@ export default function Register() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className={`w-full rounded-xl border bg-white py-2.5 pl-10 pr-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 ${
+                    className={`w-full rounded-lg border bg-white py-2 pl-7 pr-2 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-3 sm:text-sm ${
                       errors.email
                         ? "border-rose-300 focus:ring-rose-100"
                         : "border-slate-200 focus:border-primary focus:ring-orange-100"
                     }`}
                   />
-
                 </div>
 
                 {errors.email && (
-                  <p className="mt-1 text-[11px] text-rose-600">
+                  <p className="mt-1 text-[9px] text-rose-600 sm:text-[11px]">
                     {errors.email}
                   </p>
                 )}
-
               </div>
-
 
               {/* ========================= */}
               {/* ROLE */}
               {/* ========================= */}
               <div>
-
                 <label
                   htmlFor="role"
-                  className="block text-xs font-medium text-slate-600"
+                  className="block text-[10px] font-medium text-slate-600 sm:text-xs"
                 >
                   I want to join as
                 </label>
@@ -273,35 +251,26 @@ export default function Register() {
                   id="role"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 outline-none transition focus:border-primary focus:ring-2 focus:ring-orange-100"
+                  className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-[11px] text-slate-800 outline-none transition focus:border-primary focus:ring-2 focus:ring-orange-100 sm:rounded-xl sm:px-3 sm:py-2.5 sm:text-sm"
                 >
-                  <option value="adopter">
-                    Adopter
-                  </option>
-
-                  <option value="shelter">
-                    Shelter / Rescuer
-                  </option>
+                  <option value="adopter">Adopter</option>
+                  <option value="shelter">Shelter / Rescuer</option>
                 </select>
-
               </div>
-
 
               {/* ========================= */}
               {/* PASSWORD */}
               {/* ========================= */}
               <div>
-
                 <label
                   htmlFor="password"
-                  className="block text-xs font-medium text-slate-600"
+                  className="block text-[10px] font-medium text-slate-600 sm:text-xs"
                 >
                   Password
                 </label>
 
                 <div className="relative mt-1">
-
-                  <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                  <Lock className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-slate-400 sm:left-3 sm:h-4 sm:w-4" />
 
                   <input
                     id="password"
@@ -309,43 +278,33 @@ export default function Register() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Create a strong password"
-                    className={`w-full rounded-xl border bg-white py-2.5 pl-10 pr-10 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 ${
+                    className={`w-full rounded-lg border bg-white py-2 pl-7 pr-8 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-10 sm:text-sm ${
                       errors.password
                         ? "border-rose-300 focus:ring-rose-100"
                         : "border-slate-200 focus:border-primary focus:ring-orange-100"
                     }`}
                   />
 
-
                   {/* Show / Hide Password */}
                   <button
                     type="button"
-                    onClick={() =>
-                      setShowPassword((v) => !v)
-                    }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 sm:right-3"
                     aria-label={
-                      showPassword
-                        ? "Hide password"
-                        : "Show password"
+                      showPassword ? "Hide password" : "Show password"
                     }
                   >
-
                     {showPassword ? (
-                      <EyeOff className="h-4 w-4" />
+                      <EyeOff className="h-3 w-3 sm:h-4 sm:w-4" />
                     ) : (
-                      <Eye className="h-4 w-4" />
+                      <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
                     )}
-
                   </button>
-
                 </div>
-
 
                 {/* Password Requirements */}
                 {password.length > 0 && (
-                  <div className="mt-2 space-y-1">
-
+                  <div className="mt-1 space-y-0.5 sm:mt-2 sm:space-y-1">
                     {[
                       {
                         ok: passwordChecks.length,
@@ -360,88 +319,64 @@ export default function Register() {
                         label: "Contains a number",
                       },
                     ].map((c) => (
-
                       <p
                         key={c.label}
-                        className={`flex items-center gap-1.5 text-[11px] ${
-                          c.ok
-                            ? "text-primary"
-                            : "text-slate-400"
+                        className={`flex items-center gap-1 text-[8px] sm:gap-1.5 sm:text-[11px] ${
+                          c.ok ? "text-primary" : "text-slate-400"
                         }`}
                       >
-
                         <Check
-                          className={`h-3 w-3 ${
-                            c.ok
-                              ? "opacity-100"
-                              : "opacity-30"
+                          className={`h-2.5 w-2.5 sm:h-3 sm:w-3 ${
+                            c.ok ? "opacity-100" : "opacity-30"
                           }`}
                         />
-
                         {c.label}
-
                       </p>
-
                     ))}
-
                   </div>
                 )}
 
-
                 {errors.password && (
-                  <p className="mt-1 text-[11px] text-rose-600">
+                  <p className="mt-1 text-[9px] text-rose-600 sm:text-[11px]">
                     {errors.password}
                   </p>
                 )}
-
               </div>
-
 
               {/* ========================= */}
               {/* CONFIRM PASSWORD */}
               {/* ========================= */}
               <div>
-
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-xs font-medium text-slate-600"
+                  className="block text-[10px] font-medium text-slate-600 sm:text-xs"
                 >
                   Confirm Password
                 </label>
 
                 <div className="relative mt-1">
-
-                  <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                  <Lock className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-slate-400 sm:left-3 sm:h-4 sm:w-4" />
 
                   <input
                     id="confirmPassword"
-                    type={
-                      showPassword
-                        ? "text"
-                        : "password"
-                    }
+                    type={showPassword ? "text" : "password"}
                     value={confirmPassword}
-                    onChange={(e) =>
-                      setConfirmPassword(e.target.value)
-                    }
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Re-enter your password"
-                    className={`w-full rounded-xl border bg-white py-2.5 pl-10 pr-3 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 ${
+                    className={`w-full rounded-lg border bg-white py-2 pl-7 pr-2 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-3 sm:text-sm ${
                       errors.confirmPassword
                         ? "border-rose-300 focus:ring-rose-100"
                         : "border-slate-200 focus:border-primary focus:ring-orange-100"
                     }`}
                   />
-
                 </div>
 
                 {errors.confirmPassword && (
-                  <p className="mt-1 text-[11px] text-rose-600">
+                  <p className="mt-1 text-[9px] text-rose-600 sm:text-[11px]">
                     {errors.confirmPassword}
                   </p>
                 )}
-
               </div>
-
 
               {/* ========================= */}
               {/* SUBMIT BUTTON */}
@@ -449,48 +384,32 @@ export default function Register() {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-primary py-2 text-[11px] font-semibold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60 sm:rounded-xl sm:py-3 sm:text-sm"
               >
-
                 {loading ? (
-                  <span>
-                    Creating Account...
-                  </span>
+                  <span>Creating Account...</span>
                 ) : (
                   <>
-                    <span>
-                      Create Account
-                    </span>
-
-                    <ArrowRight className="h-4 w-4" />
+                    <span>Create Account</span>
+                    <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                   </>
                 )}
-
               </button>
-
             </form>
 
-
             {/* Login Link */}
-            <div className="mt-6 text-center text-xs text-slate-500">
-
+            <div className="mt-3 text-center text-[10px] text-slate-500 sm:mt-6 sm:text-xs">
               Already have an account?{" "}
-
               <Link
                 to="/login"
                 className="font-semibold text-primary hover:underline"
               >
                 Login
               </Link>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

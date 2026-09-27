@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -13,6 +12,10 @@ import {
 import { DotLottiePlayer } from "@dotlottie/react-player";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Backend URL
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -76,7 +79,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,10 +100,12 @@ export default function Register() {
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-        
+
       navigate("/");
     } catch (err) {
-      setServerError(err.message);
+      setServerError(
+        err.message || "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -112,9 +117,7 @@ export default function Register() {
       <div className="w-full overflow-hidden rounded-2xl border border-orange-100 bg-white shadow-xl shadow-orange-900/5">
         {/* Always 2 Columns */}
         <div className="grid grid-cols-2">
-          {/* ========================= */}
           {/* LEFT SIDE - LOTTIE */}
-          {/* ========================= */}
           <div className="flex min-h-[500px] items-center justify-center p-3 sm:p-6 md:p-10">
             <div className="w-full max-w-md text-center">
               {/* Lottie Animation */}
@@ -137,9 +140,7 @@ export default function Register() {
             </div>
           </div>
 
-          {/* ========================= */}
           {/* RIGHT SIDE - REGISTER FORM */}
-          {/* ========================= */}
           <div className="p-3 sm:p-5 md:p-8 lg:p-10">
             {/* Heading */}
             <div className="text-center">
@@ -166,9 +167,7 @@ export default function Register() {
               noValidate
               className="mt-4 space-y-2.5 sm:mt-6 sm:space-y-4"
             >
-              {/* ========================= */}
               {/* FULL NAME */}
-              {/* ========================= */}
               <div>
                 <label
                   htmlFor="name"
@@ -186,6 +185,7 @@ export default function Register() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your name"
+                    autoComplete="name"
                     className={`w-full rounded-lg border bg-white py-2 pl-7 pr-2 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-3 sm:text-sm ${
                       errors.name
                         ? "border-rose-300 focus:ring-rose-100"
@@ -201,9 +201,7 @@ export default function Register() {
                 )}
               </div>
 
-              {/* ========================= */}
               {/* EMAIL */}
-              {/* ========================= */}
               <div>
                 <label
                   htmlFor="email"
@@ -221,6 +219,7 @@ export default function Register() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
+                    autoComplete="email"
                     className={`w-full rounded-lg border bg-white py-2 pl-7 pr-2 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-3 sm:text-sm ${
                       errors.email
                         ? "border-rose-300 focus:ring-rose-100"
@@ -236,9 +235,7 @@ export default function Register() {
                 )}
               </div>
 
-              {/* ========================= */}
               {/* ROLE */}
-              {/* ========================= */}
               <div>
                 <label
                   htmlFor="role"
@@ -258,9 +255,7 @@ export default function Register() {
                 </select>
               </div>
 
-              {/* ========================= */}
               {/* PASSWORD */}
-              {/* ========================= */}
               <div>
                 <label
                   htmlFor="password"
@@ -278,6 +273,7 @@ export default function Register() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Create a strong password"
+                    autoComplete="new-password"
                     className={`w-full rounded-lg border bg-white py-2 pl-7 pr-8 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-10 sm:text-sm ${
                       errors.password
                         ? "border-rose-300 focus:ring-rose-100"
@@ -343,9 +339,7 @@ export default function Register() {
                 )}
               </div>
 
-              {/* ========================= */}
               {/* CONFIRM PASSWORD */}
-              {/* ========================= */}
               <div>
                 <label
                   htmlFor="confirmPassword"
@@ -363,6 +357,7 @@ export default function Register() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Re-enter your password"
+                    autoComplete="new-password"
                     className={`w-full rounded-lg border bg-white py-2 pl-7 pr-2 text-[11px] text-slate-800 placeholder-slate-400 outline-none transition focus:ring-2 sm:rounded-xl sm:py-2.5 sm:pl-10 sm:pr-3 sm:text-sm ${
                       errors.confirmPassword
                         ? "border-rose-300 focus:ring-rose-100"
@@ -378,9 +373,7 @@ export default function Register() {
                 )}
               </div>
 
-              {/* ========================= */}
               {/* SUBMIT BUTTON */}
-              {/* ========================= */}
               <button
                 type="submit"
                 disabled={loading}
@@ -413,4 +406,3 @@ export default function Register() {
     </section>
   );
 }
-

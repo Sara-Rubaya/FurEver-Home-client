@@ -4,11 +4,34 @@ import Footer from "./components/Footer.jsx";
 import Hero from "./components/Hero.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
 
-// Home page = Hero section for now. Baki section (animal listing, search etc)
-// pore add hobe.
+
 function Home() {
   return <Hero />;
+}
+
+function Dashboard() {
+  const { user } = useAuth();
+  return (
+    <section className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <h1 className="text-2xl font-bold text-dark">
+        Welcome, {user?.name} ({user?.role})
+      </h1>
+      <p className="mt-2 text-gray-600">
+        This protected dashboard - only shelter/admin can access.
+      </p>
+    </section>
+  );
+}
+function Unauthorized() {
+  return (
+    <section className="mx-auto max-w-md px-4 py-24 text-center">
+      <h1 className="text-2xl font-bold text-red-600">403 - Access Denied</h1>
+      <p className="mt-2 text-gray-600">Protected </p>
+    </section>
+  );
 }
 
 export default function App() {
@@ -20,6 +43,15 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={["shelter", "admin"]}>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />

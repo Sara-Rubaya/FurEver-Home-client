@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
-// Login page - email + password diye backend /api/auth/login e request pathabe
+
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -28,9 +30,8 @@ export default function Login() {
         throw new Error(data.message || "Login failed");
       }
 
-      // Token localStorage e save kora - pore protected route er jonno use hobe
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // Token + user AuthContext e save kora - localStorage context nijei handle kore
+      login(data.user, data.token);
       navigate("/");
     } catch (err) {
       setError(err.message);

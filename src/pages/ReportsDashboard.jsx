@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
+import { API_URL } from "../api.js";
 
 const STATUS_COLORS = {
   pending: "bg-red-100 text-red-700",

@@ -9,6 +9,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
+import { API_URL } from "../api.js";
 
 const ROLE_COLORS = {
   adopter: "bg-blue-100 text-blue-700",

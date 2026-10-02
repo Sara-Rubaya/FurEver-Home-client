@@ -31,8 +31,8 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     setLoading(true);
     const [statsRes, usersRes] = await Promise.all([
-      fetch("/api/admin/stats", { headers: authHeaders }),
-      fetch("/api/admin/users", { headers: authHeaders }),
+      fetch(`${API_URL}/api/admin/stats `, { headers: authHeaders }),
+      fetch(`${API_URL}/api/admin/users `, { headers: authHeaders }),
     ]);
     setStats(await statsRes.json());
     setUsers(await usersRes.json());
@@ -46,14 +46,14 @@ export default function AdminDashboard() {
 
   const handleVerify = async (id) => {
     setActionLoadingId(id);
-    await fetch(`/api/admin/users/${id}/verify`, { method: "PATCH", headers: authHeaders });
+    await fetch(`${API_URL}/api/admin/users/${id}/verify`, { method: "PATCH", headers: authHeaders });
     await fetchData();
     setActionLoadingId(null);
   };
 
   const handleRoleChange = async (id, role) => {
     setActionLoadingId(id);
-    await fetch(`/api/admin/users/${id}/role`, {
+    await fetch(`${API_URL}/api/admin/users/${id}/role`, {
       method: "PATCH",
       headers: authHeaders,
       body: JSON.stringify({ role }),
@@ -65,7 +65,7 @@ export default function AdminDashboard() {
   const handleDelete = async (id) => {
     if (!confirm("Delete this user? This cannot be undone.")) return;
     setActionLoadingId(id);
-    await fetch(`/api/admin/users/${id}`, { method: "DELETE", headers: authHeaders });
+    await fetch(`${API_URL}/api/admin/users/${id}` , { method: "DELETE", headers: authHeaders });
     await fetchData();
     setActionLoadingId(null);
   };

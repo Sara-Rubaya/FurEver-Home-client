@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Camera, MapPin, Loader2 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
+import { API_URL } from "../api.js";
 
 export default function ReportAnimal() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ export default function ReportAnimal() {
   try {
     const photoUrl = await uploadToCloudinary(photoFile);
 
-    const res = await fetch("/api/reports", {
+    const res = await fetch(`${API_URL}/api/reports`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

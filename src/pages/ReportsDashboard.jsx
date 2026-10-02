@@ -16,7 +16,7 @@ export default function ReportsDashboard() {
   const fetchReports = async () => {
     setLoading(true);
     const query = filter !== "all" ? `?status=${filter}` : "";
-    const res = await fetch(`/api/reports${query}`, {
+    const res = await fetch(`${API_URL}/api/reports${query}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
@@ -30,7 +30,7 @@ export default function ReportsDashboard() {
   }, [filter]);
 
   const handleStatusChange = async (id, status) => {
-    await fetch(`/api/reports/${id}/status`, {
+    await fetch(`${API_URL}/api/reports/${id}/status`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

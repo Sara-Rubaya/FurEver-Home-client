@@ -14,7 +14,7 @@ export default function MyReports() {
 
   useEffect(() => {
     const fetchMyReports = async () => {
-      const res = await fetch("/api/reports", {
+      const res = await fetch(`${API_URL}/api/reports`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();

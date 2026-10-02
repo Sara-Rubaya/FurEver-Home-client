@@ -6,6 +6,9 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
+import ReportAnimal from "./pages/ReportAnimal.jsx";
+import ReportsDashboard from "./pages/ReportsDashboard.jsx";
+import MyReports from "./pages/MyReports.jsx";
 
 
 function Home() {
@@ -51,6 +54,30 @@ export default function App() {
                 <Dashboard />
               </ProtectedRoute>
             }
+          />
+          <Route
+            path="/report"
+            element={
+              <ProtectedRoute>
+                <ReportAnimal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              <ProtectedRoute allowedRoles={["shelter", "admin"]}>
+                <ReportsDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+              path="/my-reports"
+              element={
+                <ProtectedRoute>
+                  <MyReports />
+                </ProtectedRoute>
+              }
           />
         </Routes>
       </main>

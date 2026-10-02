@@ -16,6 +16,7 @@ export default function ReportAnimal() {
   const [locating, setLocating] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
@@ -58,57 +59,63 @@ export default function ReportAnimal() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    if (!photoFile) {
-      setError("Please upload a photo of the animal");
-      return;
-    }
-    if (!address.trim()) {
-      setError("Please provide a location");
-      return;
-    }
+  if (!photoFile) {
+    setError("Please upload a photo of the animal");
+    return;
+  }
+  if (!address.trim()) {
+    setError("Please provide a location");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const photoUrl = await uploadToCloudinary(photoFile);
+  setLoading(true);
+  try {
+    const photoUrl = await uploadToCloudinary(photoFile);
 
-      const res = await fetch("/api/reports", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          animalType,
-          description,
-          photoUrl,
-          location: { address, lat: coords?.lat || 0, lng: coords?.lng || 0 },
-        }),
-      });
-      const data = await res.json();
+    const res = await fetch("/api/reports", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        animalType,
+        description,
+        photoUrl,
+        location: { address, lat: coords?.lat || 0, lng: coords?.lng || 0 },
+      }),
+    });
+    const data = await res.json();
 
-      if (!res.ok) throw new Error(data.message || "Failed to submit report");
+    if (!res.ok) throw new Error(data.message || "Failed to submit report");
 
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setSuccess(true);
+    setTimeout(() => navigate("/my-reports"), 1500); // 1.5 sec dekhiye tarpor redirect
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <section className="mx-auto max-w-xl px-4 py-12">
       <h1 className="text-2xl font-bold text-dark">Report a Stray or Injured Animal</h1>
       <p className="mt-1 text-sm text-gray-600">
-        Report ta diley kacher rescuer/shelter druto response dite parbe.
+        By submitting a report, nearby rescuers or shelters can respond quickly.
       </p>
 
       {error && (
         <p className="mt-4 rounded-md bg-red-100 px-4 py-2 text-sm text-red-700">{error}</p>
       )}
+      {success && (
+        <p className="mt-4 rounded-md bg-green-100 px-4 py-2 text-sm text-green-700">
+            Report submitted successfully! Redirecting...
+        </p>
+        )}
 
       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
         <div>

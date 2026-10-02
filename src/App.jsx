@@ -9,6 +9,7 @@ import { useAuth } from "./context/AuthContext.jsx";
 import ReportAnimal from "./pages/ReportAnimal.jsx";
 import ReportsDashboard from "./pages/ReportsDashboard.jsx";
 import MyReports from "./pages/MyReports.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 
 
 function Home() {
@@ -17,6 +18,9 @@ function Home() {
 
 function Dashboard() {
   const { user } = useAuth();
+  if (user?.role === "admin") {
+    return <AdminDashboard />;
+  }
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 text-center">
       <h1 className="text-2xl font-bold text-dark">
@@ -79,6 +83,7 @@ export default function App() {
                 </ProtectedRoute>
               }
           />
+          
         </Routes>
       </main>
       <Footer />

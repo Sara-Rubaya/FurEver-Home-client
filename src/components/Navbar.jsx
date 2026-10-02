@@ -3,7 +3,6 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaPaw, FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext.jsx";
 
-
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
@@ -48,6 +47,7 @@ export default function Navbar() {
               Dashboard
             </NavLink>
           )}
+          
         </nav>
 
         {/* Desktop auth buttons */}
@@ -55,13 +55,12 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-50 to-purple-50 px-4 py-2 text-sm font-medium text-violet-700 shadow-sm ring-1 ring-violet-100">
-  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-600 text-xs font-bold text-white">
-    {user.name?.charAt(0).toUpperCase()}
-  </span>
-
-  <span>
-    Hi, <span className="font-semibold text-gray-900">{user.name}</span>
-  </span>
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-600 text-xs font-bold text-white">
+                  {user.name?.charAt(0).toUpperCase()}
+                </span>
+                <span>
+                  Hi, <span className="font-semibold text-gray-900">{user.name}</span>
+                </span>
               </span>
               <button
                 onClick={handleLogout}
@@ -116,6 +115,7 @@ export default function Navbar() {
               Dashboard
             </NavLink>
           )}
+          
           <hr />
           {isAuthenticated ? (
             <button onClick={handleLogout} className="text-left text-gray-700">

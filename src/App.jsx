@@ -10,10 +10,22 @@ import ReportAnimal from "./pages/ReportAnimal.jsx";
 import ReportsDashboard from "./pages/ReportsDashboard.jsx";
 import MyReports from "./pages/MyReports.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
+import WhyChooseUs from "./components/WhyChooseUs.jsx";
+import HowItWorks from "./components/HowItWorks.jsx";
+import FAQ from "./components/FAQ.jsx";
+import CTA from "./components/CTA.jsx";
 
 
 function Home() {
-  return <Hero />;
+  return (
+    <>
+      <Hero />
+      <WhyChooseUs />
+      <HowItWorks />
+      <FAQ />
+      <CTA />
+    </>
+  );
 }
 
 function Dashboard() {

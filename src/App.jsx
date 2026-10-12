@@ -57,12 +57,27 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
+
+
       <main className="flex-grow">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route 
+          path="/" 
+          element={<Home />} />
+
+          <Route
+           path="/login" 
+           element={<Login />} />
+
+          <Route 
+          path="/register" 
+          element={<Register />} />
+
+          <Route
+           path="/unauthorized" 
+           element={<Unauthorized />} />
+
+
           <Route
             path="/dashboard"
             element={
@@ -71,6 +86,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/report"
             element={
@@ -87,6 +103,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          
           <Route
               path="/my-reports"
               element={

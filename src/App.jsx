@@ -14,6 +14,13 @@ import WhyChooseUs from "./components/WhyChooseUs.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 import FAQ from "./components/FAQ.jsx";
 import CTA from "./components/CTA.jsx";
+import Animals from "./pages/Animals.jsx";
+import AnimalDetails from "./pages/AnimalDetails.jsx";
+import ApplyAdoption from "./pages/ApplyAdoption.jsx";
+import MyApplications from "./pages/MyApplications.jsx";
+import ShelterAnimals from "./pages/ShelterAnimals.jsx";
+import ShelterApplications from "./pages/ShelterApplications.jsx";
+
 
 
 function Home() {
@@ -103,7 +110,42 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          
+          <Route path="/animals" element={<Animals />} />
+<Route path="/animals/:id" element={<AnimalDetails />} />
+
+<Route
+  path="/animals/:id/apply"
+  element={
+    <ProtectedRoute allowedRoles={["adopter"]}>
+      <ApplyAdoption />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/my-applications"
+  element={
+    <ProtectedRoute allowedRoles={["adopter"]}>
+      <MyApplications />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/my-animals"
+  element={
+    <ProtectedRoute allowedRoles={["shelter"]}>
+      <ShelterAnimals />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/shelter-applications"
+  element={
+    <ProtectedRoute allowedRoles={["shelter", "admin"]}>
+      <ShelterApplications />
+    </ProtectedRoute>
+  }
+/>
+
           <Route
               path="/my-reports"
               element={
@@ -112,6 +154,7 @@ export default function App() {
                 </ProtectedRoute>
               }
           />
+          
           
         </Routes>
       </main>
